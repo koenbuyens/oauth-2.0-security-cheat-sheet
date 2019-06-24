@@ -62,7 +62,7 @@ There are two ways to pass the above tokens throughout the system, namely:
 - **Handle-based Tokens**  (opaque tokens, reference tokens) are typically random strings that can be used to retrieve the data associated with that token. This is similar to passing a variable by reference in a programming language.
 - **Self-contained Tokens** are tokens that contain all the data associated with that token. This is similar to passing a variable by value in a programming language. This is typically expressed as a JWT.
 
-Refresh tokens are handle-based. Access tokens can be either.
+Refresh tokens are handle-based, access tokens can be either, and identity tokens (OpenID/Connect) are self contained.
 
 **OpenID/Connect** is an authentication mechanism built on top of the authZ code grant. The server also returns an identity token (JWT) containing information about the user.
 
