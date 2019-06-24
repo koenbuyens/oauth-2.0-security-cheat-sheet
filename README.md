@@ -64,7 +64,11 @@ There are two ways to pass the above tokens throughout the system, namely:
 
 Refresh tokens are handle-based. Access tokens can be either.
 
-OpenID/Connect is an authenitcation mechanism built on top of the authZ grant.
+**OpenID/Connect** is an authentication mechanism built on top of the authZ code grant.
+
+There are two types of clients:
+- A **Public Client** is an Oauth Client that cannot store client secrets securely. This category includes mobile applications, single page applications, and desktop clients as an attacker is able to extract the secrets by downloading those applications.
+- A **Confidential Client** is an OAuth Client that is able to store secrets securely. This category includes classic web applications. 
 
 ## Architectural Decisions
 
