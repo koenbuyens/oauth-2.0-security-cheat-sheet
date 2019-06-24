@@ -38,9 +38,9 @@
 OAuth 2.0 is a standard that enables users to give websites access to their data/services at other websites. For instance, a user gives a photo printing website access to her pictures on Flickr. Before performing a deep-dive into the specifics of OAuth 2.0, we introduce some definitions (taken from auth0):
 
 - **Resource Owner**: the entity that can grant access to a protected resource. Typically this is the end-user.
-Client: an application requesting access to a protected resource on behalf of the Resource Owner. This is also called a Relying Party.
+- **Client**: an application requesting access to a protected resource on behalf of the Resource Owner. This is also called a Relying Party.
 - **Resource Server**: the server hosting the protected resources. This is the API you want to access.
-Authorization Server: the server that authenticates the Resource Owner, and issues access tokens after getting proper authorization. This is also called an identity provider (IdP).
+- **Authorization Server**: the server that authenticates the Resource Owner, and issues access tokens after getting proper authorization. This is also called an identity provider (IdP).
 - **User Agent**: the agent used by the Resource Owner to interact with the Client, for example a browser or a mobile application.
 
 In OAuth 2.0, the interactions between the user and her client, the Authorization Server, and the Resource Server can be performed in four different flows. These flows enable the clients to obtain Access Tokens and the clients use these access tokens to access an API. The flows are as follows.
@@ -64,7 +64,7 @@ There are two ways to pass the above tokens throughout the system, namely:
 
 Refresh tokens are handle-based. Access tokens can be either.
 
-**OpenID/Connect** is an authentication mechanism built on top of the authZ code grant.
+**OpenID/Connect** is an authentication mechanism built on top of the authZ code grant. The server also returns an identity token (JWT) containing information about the user.
 
 There are two types of clients:
 - A **Public Client** is an Oauth Client that cannot store client secrets securely. This category includes mobile applications, single page applications, and desktop clients as an attacker is able to extract the secrets by downloading those applications.
