@@ -78,7 +78,7 @@ A major design decision is deciding which flows to support. This largely depends
 
 - A classic web application, use the Authorization Code Grant.
 - A single page application, use the Implicit Grant.
-A native mobile application, use the Authorization Code Grant with PKCE.
+- A native mobile application, use the Authorization Code Grant with PKCE.
 - A client that is absolutely trusted with user credentials (i.e. the Facebook app accessing Facebook), use the Resource Owner Password Grant.
 - A client that is the owner of the data, use the Client Credentials Grant.
 
