@@ -30,6 +30,8 @@
     - [Only Use Resource Owner Password Grant for First-Party Apps](#Only-Use-Resource-Owner-Password-Grant-for-First-Party-Apps)
     - [Follow Password-AuthN Best Practices at OAuth Endpoint](#Follow-Password-AuthN-Best-Practices-at-OAuth-Endpoint)
     - [Store Refresh Token Rather Than User Passwords](#Store-Refresh-Token-Rather-Than-User-Passwords)
+  - [Client Credentials Grant](#Client-Credentials-Grant)
+  - [Open ID/Connect](#Open-IDConnect)
 
 ## Introduction
 
@@ -132,6 +134,20 @@ To remediate this, keep the access tokens in memory and store the refresh tokens
 
 ## Authorization Code Grant
 
+Authorization code grant is used by various clients to exchange an authorization code for an access token.
+
+The flow is illustrated below.
+![Authorization code grant](https://raw.githubusercontent.com/koenbuyens/Damn-Vulnerable-OAuth-2.0-Applications/master/pics/AuthorizationCodeGrant.png)
+
+1. A user, let's call her Vivian, navigates to the printing website, photoprint. This website is called the Client. Vivian uploaded the pictures to picture gallery site (gallery). The printing website offers the possibility to obtain pictures from the gallery site via a button that says “Print pictures from Gallery”. Vivian clicks that button.
+2. The client redirects her to an Authorization Server (AS; Authorization Endpoint). In our case, hosted by gallery. The URI contains the parameters redirect_uri, scope, response_type, and client_id. The redirect_uri is where gallery will redirect Vivian after having created an authorization code. The scope is the access level that the client needs (view_gallery is a custom scope that enables clients to view the pictures from a user's gallery). The response_type is code as we want to use the authorization code grant. The client_id is an identifier that represents the photoprint application.
+That server allows Vivian to authenticate to the gallery site and asks her if she consents to the Client photoprint accessing her pictures.
+3. Assuming that Vivian gives her consent, the AS generates an Authorization Code (Authorization Grant) and sends it back to Vivian’s browser with a redirect command toward the return URL specified by the Client photoprint (in step 2).
+4. The browser honors the redirect and passes the Authorization Code to the Client (photoprint).
+5. The Client photoprint forwards that Authorization Code together with its own credentials to the AS (Token Endpoint) at gallery. From this step on, the interactions are server-to-server. The Authorization Code proves that Vivian consented to the actions that the Client photoprint wants to do. Moreover, the message contains the Client’s own credentials (the Client ID and the Client Secret).
+6. Assuming that the Client photoprint is allowed to make requests, the Token Endpoint at the Authorization Server gallery issues the Client photoprint an Access Token. The AS may also issue a Refresh Token. The refresh token enables the Client photoprint to obtain new access tokens; e.g. when the old ones expire. Typically, refresh tokens are issued when offline_access is added to the scope in step 2.
+7. The Client photoprint then uses the access token to access a Protected Resource, Vivian's pictures, on the Resource Server gallery. The gallery application then validates the access token and processes the request.
+
 ### Client: Use the state parameter
 
 An attacker will be able to associate his/her OAuth 2.0 identity with the user's account at the client application if the client does not use the state parameter.
@@ -212,3 +228,18 @@ An attacker might be able to obtain the user password at client.
 
 Do not store the user credentials on the device. Store the refresh token instead.
 
+## Client Credentials Grant
+
+When the authorization scope is limited to protected resources under the control of the client or to protected resources previously arranged with the authorization server, then the client credentials can be used as a grant. This is typically used in B2B scenarios. The flow is as follows.
+
+1. The client submits her credentials to the Authorization Server.
+2. The AS generates an Access Token and sends it back to the Client.
+3. The Client can access the resources with the Access Token.
+
+Follow the best practices around client credentials and tokens.
+
+## Open ID/Connect
+
+Extension of Authorization Code Grant to authenticate users. The authorization server returns an identity token (JWT) signed by the identity provider together with the access token. Clients can use this token to identify the user.
+
+The best practices for the Authorization Code Grant, JWT, and OAuth Credentials apply.
