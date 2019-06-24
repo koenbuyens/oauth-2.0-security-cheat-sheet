@@ -212,6 +212,13 @@ To mitigate this, use the SHA256 code challenge method.
 
 ## Resource Owner Password Grant
 
+The resource owner password credentials grant is a simplified flow in which the client uses the resource owner password credentials (username and password) to obtain an access token. It consists of the following steps.
+
+A user, let's call her Vivian, uses the OAuth Client to upload pictures to a gallery site (Gallery). (e.g. mobile app).
+1. The client submits Vivian's credentials to the Authorization Server. 
+2. The AS generates an Access Token and sends it back to the Client. 
+3. The Client can then access the Resource Server to upload Vivian's pictures with the Access Token.
+
 ### Only Use Resource Owner Password Grant for First-Party Apps
 
 A malicious client may be able to obtain the user passwords or obtain powerful tokens (scopes) without End-User authorization.
