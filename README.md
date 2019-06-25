@@ -1,4 +1,4 @@
-# OAuth 2.0 Cheat Sheet
+# OAuth 2.0 Security Cheat Sheet
 
 - [OAuth 2.0 Cheat Sheet](#OAuth-20-Cheat-Sheet)
   - [Introduction](#Introduction)
